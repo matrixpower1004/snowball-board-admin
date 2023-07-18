@@ -1,7 +1,6 @@
-package com.snowball.snowballboardadmin.domain.admin.model;
+package com.snowball.boardadmin.domain.board.model;
 
-import com.snowball.snowballboardadmin.common.util.ReportType;
-import com.snowball.snowballboardadmin.common.util.ThreadType;
+import com.snowball.boardadmin.common.util.ReportType;
 import lombok.*;
 
 import java.sql.Timestamp;
@@ -20,10 +19,8 @@ import java.sql.Timestamp;
 public class ReportBoard {
 
     private Long id;
-    private Long threadId;
-    private ThreadType threadType;
+    private Long postId;
     private ReportType reportType;
-    private Long writerId;
     private Long reporterId;
     private String reportImgUrl;
     private Timestamp reportDate;

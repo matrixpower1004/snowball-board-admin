@@ -1,7 +1,7 @@
-package com.snowball.snowballboardadmin.common.util;
+package com.snowball.boardadmin.common.util;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 /**
  * author         : Jason Lee
@@ -9,7 +9,7 @@ import lombok.Getter;
  * description    :
  */
 @Getter
-@AllArgsConstructor
+@RequiredArgsConstructor
 public enum ReportType {
     ABUSE("욕설"),
     CALUMNY("비방"),
@@ -17,6 +17,6 @@ public enum ReportType {
     SPAM("스팸"),
     AD("광고)");
 
-    private String value;
+    private final String value;
 
 }
