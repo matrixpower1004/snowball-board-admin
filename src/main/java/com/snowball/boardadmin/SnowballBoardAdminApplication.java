@@ -1,4 +1,4 @@
-package com.snowball.snowballboardadmin;
+package com.snowball.boardadmin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

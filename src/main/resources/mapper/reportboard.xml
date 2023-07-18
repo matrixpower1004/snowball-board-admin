@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.snowball.boardadmin.domain.board.repository.ReportBoardRepository">
+
+    <select id="findAll" resultType="com.snowball.boardadmin.domain.board.dto.ReportRequestDto">
+        select max(rb.id)                                     as id,
+               rb.post_id,
+               u.id                                           as writer_id,
+               u.user_name                                    as writer_name,
+               u.user_role,
+               p.title,
+               max(rb.reporter_id)                            as reporter_id,
+               (select user_name
+                from user_tb
+                where id =
+                      (select max(rb.reporter_id) from dual)) as reporter_name,
+               max(rb.report_img_url)                         as report_img_url,
+               count(rb.post_id)                              as report_count,
+               max(rb.report_date)                            as report_date
+        from report_board rb
+                 join post p
+                      on rb.post_id = p.id
+                 join user_tb u
+                      on p.user_id = u.id
+        group by rb.post_id
+        order by report_date desc, report_count desc
+    </select>
+
+    <delete id="deleteByPostId">
+        delete from report_board where post_id = #{postId}
+    </delete>
+
+    <select id="findByMaxReportId" resultType="Long">
+        SELECT post_id, COUNT(*) AS count
+        FROM report_board
+        GROUP BY post_id
+        ORDER BY count DESC
+        LIMIT 1;
+    </select>
+
+    <select id="countByDistinct" resultType="int">
+        select count(distinct post_id) from report_board
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from report_board;
+    </select>
+
+    <select id="searchResultList" parameterType="com.snowball.boardadmin.common.util.CustomPage"
+            resultType="com.snowball.boardadmin.domain.board.dto.ReportRequestDto">
+        select max(rb.id)                                     as id,
+               rb.post_id,
+               u.id                                           as writer_id,
+               u.user_name                                    as writer_name,
+               u.user_role,
+               p.title,
+               max(rb.reporter_id)                            as reporter_id,
+               (select user_name
+                from user_tb
+                where id =
+                      (select max(rb.reporter_id) from dual)) as reporter_name,
+               max(rb.report_img_url)                         as report_img_url,
+               count(rb.post_id)                              as report_count,
+               max(rb.report_date)                            as report_date
+        from report_board rb
+                 join post p
+                      on rb.post_id = p.id
+                 join user_tb u
+                      on p.user_id = u.id
+        group by rb.post_id
+        order by report_date desc, report_count desc
+        limit #{offset}, #{pageSize}
+    </select>
+
+
+</mapper>

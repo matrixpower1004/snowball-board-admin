@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.snowball.boardadmin.domain.board.repository.BoardRepository">
+
+    <select id="findStatistics" resultType="com.snowball.boardadmin.domain.board.dto.BoardStatisticsDto">
+        select id, user_name, user_role,
+               (select count(*) from post where user_id = u.id) as post_count,
+               (select count(*) from comment where user_id = u.id) as comment_count,
+               (select count(*) from reply where user_id = u.id) as reply_count,
+        from user_tb u
+        order by
+            <if test="order == 'post'">post_count</if>
+            <if test="order == 'comment'">comment_count</if>
+            <if test="order == 'reply'">reply_count</if>
+        DESC
+    </select>
+
+    <update id="saveState" parameterType="com.snowball.boardadmin.domain.board.dto.BoardStateUpdateDto">
+        update post
+        set blind_state = #{blind_state}
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Long">
+        delete from post where id = #{id}
+    </delete>
+
+    <select id="count" resultType="int">
+        select count(*) from post
+    </select>
+
+</mapper>
