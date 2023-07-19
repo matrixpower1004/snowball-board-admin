@@ -11,7 +11,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
 
 /**
@@ -30,7 +29,6 @@ class ReportBoardRepositoryTest {
     @Test
     void reportBoard_Select_Test() {
         // Given
-
 
         // When
         List<ReportRequestDto> reportRequestDtos = reportBoardRepository.findAll();
@@ -54,21 +52,18 @@ class ReportBoardRepositoryTest {
         assertThat(result).isGreaterThan(1);
     }
 
-    @DisplayName("게시판 페이징을 위해 신고된 게시글의 중복을 제외한 카운트를 가져온다.")
+    @DisplayName("게시글의 중복 신고를 제외한 갯수와 중복 신고가 포함된 게시글의 갯수를 비교한다.")
     @Test
     void reportBoard_countByDistinct_test() {
         // Given
         int countAll = reportBoardRepository.count();
         int countDistinct = reportBoardRepository.countByDistinct();
+
         System.out.println("countAll = " + countAll);
         System.out.println("countDistinct = " + countDistinct);
 
         // When & Then
         assertThat(countAll).isGreaterThan(countDistinct);
-    }
-
-    @Test
-    void test() {
     }
 
 }
