@@ -24,18 +24,19 @@
         </if>
     </sql>
 
-    <select id="searchResultCount" parameterType="com.snowball.boardadmin.common.dto.SearchDto" resultType="int">
+    <select id="searchResultCount" parameterType="com.snowball.boardadmin.common.dto.PageRequestDto"
+            resultType="int">
         select count(*) from user_tb
         <include refid="searchCondition"/>
     </select>
 
-    <select id="searchResultList" parameterType="com.snowball.boardadmin.common.dto.SearchDto"
+    <select id="searchResultList" parameterType="com.snowball.boardadmin.common.dto.PageRequestDto"
             resultType="com.snowball.boardadmin.domain.user.dto.UserResponseDto">
         select id, user_name, email,nick_name,user_role, updated_at
         from user_tb
         <include refid="searchCondition"/>
         order by updated_at desc, id desc
-        limit #{offset}, #{pageSize}
+        limit #{offset}, #{size}
     </select>
 
 </mapper>

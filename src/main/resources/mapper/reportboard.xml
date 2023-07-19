@@ -49,7 +49,7 @@
         select count(*) from report_board;
     </select>
 
-    <select id="searchResultList" parameterType="com.snowball.boardadmin.common.util.CustomPage"
+    <select id="searchResultList" parameterType="com.snowball.boardadmin.common.dto.PageRequestDto"
             resultType="com.snowball.boardadmin.domain.board.dto.ReportRequestDto">
         select max(rb.id)                                     as id,
                rb.post_id,
