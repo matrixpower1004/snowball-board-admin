@@ -1,8 +1,8 @@
 package com.snowball.boardadmin.domain.user.repository;
 
-import com.snowball.boardadmin.common.util.CustomPage;
-import com.snowball.boardadmin.domain.user.dto.UserResponseDto;
+import com.snowball.boardadmin.common.dto.PageRequestDto;
 import com.snowball.boardadmin.domain.user.dto.UserRequestDto;
+import com.snowball.boardadmin.domain.user.dto.UserResponseDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -20,8 +20,8 @@ public interface UserRepository {
 
     int count();
 
-    int searchResultCount(CustomPage pagination);
+    int searchResultCount(PageRequestDto pageRequestDto);
 
-    List<UserResponseDto> searchResultList(CustomPage pagination);
+    List<UserResponseDto> searchResultList(PageRequestDto pageRequestDto);
 
 }

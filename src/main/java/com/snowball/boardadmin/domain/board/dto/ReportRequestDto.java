@@ -17,7 +17,7 @@ public record ReportRequestDto(
         UserRole userRole,
         String title,
         Long reporterId,
-        String ReporterName,
+        String reporterName,
         String reportImgUrl,
         Integer reportCount,
         Timestamp reportDate
@@ -30,7 +30,7 @@ public record ReportRequestDto(
             UserRole userRole,
             String title,
             Long reporterId,
-            String ReporterName,
+            String reporterName,
             String reportImgUrl,
             Integer reportCount,
             Timestamp reportDate
@@ -43,7 +43,7 @@ public record ReportRequestDto(
                 userRole,
                 title,
                 reporterId,
-                ReporterName,
+                reporterName,
                 reportImgUrl,
                 reportCount,
                 reportDate

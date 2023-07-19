@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
  * description    :
  */
 @Getter
+@RequiredArgsConstructor
 public class PageRequestDto {
     private final int page;
     private final int size;
