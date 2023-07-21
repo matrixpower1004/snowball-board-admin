@@ -2,7 +2,7 @@ package com.snowball.boardadmin.domain.user.repository;
 
 import com.snowball.boardadmin.common.util.UserRole;
 import com.snowball.boardadmin.domain.user.dto.UserResponseDto;
-import com.snowball.boardadmin.domain.user.dto.UserRequestDto;
+import com.snowball.boardadmin.domain.user.dto.UserUpdateDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
@@ -12,7 +12,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.mockito.internal.matchers.text.ValuePrinter.print;
 import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
 
 /**
@@ -31,10 +30,10 @@ class UserRepositoryTest {
     @Test
     void userRoleUpdate_Success_Test() {
         // Given
-        UserRequestDto usrRoleRequest = UserRequestDto.of(1L, UserRole.EXPERT);
+        UserUpdateDto userUpdateDto = UserUpdateDto.of(1L, UserRole.EXPERT);
 
         // When
-        int result = userRepository.updateUserRole(usrRoleRequest);
+        int result = userRepository.updateUserRole(userUpdateDto);
 
         // Then
         assertThat(result).isEqualTo(1);
@@ -47,6 +46,7 @@ class UserRepositoryTest {
         List<UserResponseDto> result = userRepository.findAll();
 
         // When & Then
+        System.out.println(result);
         assertThat(result).isNotNull();
     }
 
