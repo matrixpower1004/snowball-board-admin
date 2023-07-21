@@ -13,12 +13,13 @@ public record ReportResponseDto(
         Long writerId,
         String writerName,
         String userRole,
+        String title,
         Long reporterId,
-        String ReporterName,
+        String reporterName,
         Integer reportCount,
         Timestamp reportDate
 ) {
-    public static ReportResponseDto of(
+    public static ReportResponseDto from(
             ReportRequestDto reportRequestDto
     ) {
         return new ReportResponseDto(
@@ -27,8 +28,9 @@ public record ReportResponseDto(
                 reportRequestDto.writerId(),
                 reportRequestDto.writerName(),
                 reportRequestDto.userRole().getValue(),
+                reportRequestDto.title(),
                 reportRequestDto.reporterId(),
-                reportRequestDto.ReporterName(),
+                reportRequestDto.reporterName(),
                 reportRequestDto.reportCount(),
                 reportRequestDto.reportDate()
         );

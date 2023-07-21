@@ -38,6 +38,7 @@ class BoardRepositoryTest {
         int commentCount1 = statistics.get(1).commentCount();
 
         // Then
+        // 첫 게시글의 댓글 갯수가 두번째 게시글의 댓글 갯수보다 많거나 같다.
         assertTrue(commentCount0 >= commentCount1);
     }
 
@@ -53,6 +54,7 @@ class BoardRepositoryTest {
         int replyCount1 = statistics.get(1).replyCount();
 
         // Then
+        // 첫 게시물의 대댓글 갯수가 두번째 게시물의 대댓글 갯수보다 많거나 같다.
         assertTrue(replyCount0 >= replyCount1);
     }
 
@@ -68,6 +70,7 @@ class BoardRepositoryTest {
         int postCount1 = statistics.get(0).postCount();
 
         // Then
+        // 첫 게시글의 갯수가 두번째 게시글의 갯수보다 많거나 같다.
         assertTrue(postCount0 >= postCount1);
     }
 

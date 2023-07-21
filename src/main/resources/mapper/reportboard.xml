@@ -6,27 +6,30 @@
 <mapper namespace="com.snowball.boardadmin.domain.board.repository.ReportBoardRepository">
 
     <select id="findAll" resultType="com.snowball.boardadmin.domain.board.dto.ReportRequestDto">
-        select max(rb.id)                                     as id,
+        select rb.id,
                rb.post_id,
-               u.id                                           as writer_id,
-               u.user_name                                    as writer_name,
+               u.id                                                      as writer_id,
+               u.user_name                                               as writer_name,
                u.user_role,
                p.title,
-               max(rb.reporter_id)                            as reporter_id,
-               (select user_name
-                from user_tb
-                where id =
-                      (select max(rb.reporter_id) from dual)) as reporter_name,
-               max(rb.report_img_url)                         as report_img_url,
-               count(rb.post_id)                              as report_count,
-               max(rb.report_date)                            as report_date
-        from report_board rb
+               rb.reporter_id,
+               (select user_name from user_tb where id = rb.reporter_id) as reporter_name,
+               rb.report_img_url,
+               rb.report_count,
+               rb.report_date
+        from (select max(id)             as id,
+                     post_id,
+                     max(reporter_id)    as reporter_id,
+                     max(report_date)    as report_date,
+                     max(report_img_url) as report_img_url,
+                     count(post_id)      as report_count
+              from report_board
+              group by post_id) rb
                  join post p
                       on rb.post_id = p.id
                  join user_tb u
                       on p.user_id = u.id
-        group by rb.post_id
-        order by report_date desc, report_count desc
+        order by report_count desc, report_date desc
     </select>
 
     <delete id="deleteByPostId">
@@ -51,29 +54,30 @@
 
     <select id="searchResultList" parameterType="com.snowball.boardadmin.common.dto.PageRequestDto"
             resultType="com.snowball.boardadmin.domain.board.dto.ReportRequestDto">
-        select max(rb.id)                                     as id,
+        select rb.id,
                rb.post_id,
-               u.id                                           as writer_id,
-               u.user_name                                    as writer_name,
+               u.id                                                      as writer_id,
+               u.user_name                                               as writer_name,
                u.user_role,
                p.title,
-               max(rb.reporter_id)                            as reporter_id,
-               (select user_name
-                from user_tb
-                where id =
-                      (select max(rb.reporter_id) from dual)) as reporter_name,
-               max(rb.report_img_url)                         as report_img_url,
-               count(rb.post_id)                              as report_count,
-               max(rb.report_date)                            as report_date
-        from report_board rb
+               rb.reporter_id,
+               (select user_name from user_tb where id = rb.reporter_id) as reporter_name,
+               rb.report_img_url,
+               rb.report_count,
+               rb.report_date
+        from (select max(id)             as id,
+                     post_id,
+                     max(reporter_id)    as reporter_id,
+                     max(report_date)    as report_date,
+                     max(report_img_url) as report_img_url,
+                     count(post_id)      as report_count
+              from report_board
+              group by post_id) rb
                  join post p
                       on rb.post_id = p.id
                  join user_tb u
                       on p.user_id = u.id
-        group by rb.post_id
-        order by report_date desc, report_count desc
-        limit #{offset}, #{pageSize}
+        order by report_count desc, report_date desc
+        limit #{offset}, #{size}
     </select>
-
-
 </mapper>
