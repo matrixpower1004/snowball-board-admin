@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.snowball.boardadmin.domain.post.repository.PostRepository">
+
+    <select id="findStatistics">
+        select id, user_name, user_role,
+        (select count(*) from post where user_id = u.id) as post_count,
+        (select count(*) from comment where user_id = u.id) as comment_count,
+        (select count(*) from reply where user_id = u.id) as reply_count,
+        from user_tb u
+        order by
+        <if test="option == 'post'">post_count</if>
+        <if test="option == 'comment'">comment_count</if>
+        <if test="option == 'reply'">reply_count</if>
+        DESC
+    </select>
+
+    <update id="saveState">
+        update post
+        set blind_state = #{blind_state}
+        where id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete
+        from post
+        where id = #{id}
+    </delete>
+
+    <select id="count">
+        select count(*)
+        from post
+    </select>
+
+    <select id="countByOption">
+        select count(*) from post
+        <if test='option == "blind"'>
+            where blind_state = true
+        </if>
+
+    </select>
+
+    <select id="findByOption">
+        select p.id,
+        p.user_id,
+        u.user_name,
+        p.title,
+        p.content,
+        p.blind_state,
+        u.user_role,
+        p.updated_at
+        from post p
+        join user_tb u
+        on p.user_id = u.id
+        <if test='option == "blind"'>
+            where p.blind_state = true
+        </if>
+        limit #{offset}, #{size}
+    </select>
+
+</mapper>
