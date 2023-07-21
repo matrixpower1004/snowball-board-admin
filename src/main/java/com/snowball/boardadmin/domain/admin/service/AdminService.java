@@ -10,6 +10,7 @@ import com.snowball.boardadmin.domain.post.dto.ReportResponseDto;
 import com.snowball.boardadmin.domain.post.repository.PostRepository;
 import com.snowball.boardadmin.domain.post.repository.ReportRepository;
 import com.snowball.boardadmin.domain.user.dto.UserResponseDto;
+import com.snowball.boardadmin.domain.user.dto.UserStatisticsDto;
 import com.snowball.boardadmin.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -76,6 +77,21 @@ public class AdminService {
 
         List<PostResponseDto> postLists = postRepository.findByOption(pageRequestDto);
         return new Page<>(postLists, pagination);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<UserStatisticsDto> getUserStatistics(Pageable pageable, SearchDto searchDto) {
+
+        PageRequestDto pageRequestDto = PageRequestDto.from(pageable, searchDto);
+
+        int count = userRepository.countByOption(pageRequestDto);
+        System.out.println("count = " + count);
+        checkCount.apply(count);
+
+        PageImpl pagination = new PageImpl(pageable, count);
+
+        List<UserStatisticsDto> userStatistics = userRepository.findStatistics(pageRequestDto);
+        return new Page<>(userStatistics, pagination);
     }
 
     private final Function<Integer, Page> checkCount = (count) -> {

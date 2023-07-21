@@ -7,6 +7,7 @@ import com.snowball.boardadmin.domain.admin.service.AdminService;
 import com.snowball.boardadmin.domain.post.dto.PostResponseDto;
 import com.snowball.boardadmin.domain.post.dto.ReportResponseDto;
 import com.snowball.boardadmin.domain.user.dto.UserResponseDto;
+import com.snowball.boardadmin.domain.user.dto.UserStatisticsDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,10 +35,10 @@ public class AdminController {
 
     @GetMapping("/user-list")
     public String userList(Pageable pageable, SearchDto searchDto, Model model) {
-        Page<UserResponseDto> pages = adminService.getUserList(pageable, searchDto);
+        Page<UserResponseDto> userResponse = adminService.getUserList(pageable, searchDto);
 
-        model.addAttribute("users", pages.getContent());
-        model.addAttribute("pages", pages.getPageImpl());
+        model.addAttribute("users", userResponse.getContent());
+        model.addAttribute("pages", userResponse.getPageImpl());
         model.addAttribute("search", searchDto);
 
         return "/admin/userlist";
@@ -45,10 +46,10 @@ public class AdminController {
 
     @GetMapping("report-list")
     public String reportList(Pageable pageable, SearchDto searchDto, Model model) {
-        Page<ReportResponseDto> pages = adminService.getReportList(pageable, searchDto);
+        Page<ReportResponseDto> reportList = adminService.getReportList(pageable, searchDto);
 
-        model.addAttribute("reports", pages.getContent());
-        model.addAttribute("pages", pages.getPageImpl());
+        model.addAttribute("reports", reportList.getContent());
+        model.addAttribute("pages", reportList.getPageImpl());
         model.addAttribute("search", searchDto);
 
         return "/admin/reportlist";
@@ -56,13 +57,24 @@ public class AdminController {
 
     @GetMapping("/post-list")
     public String postList(Pageable pageable, SearchDto searchDto, Model model) {
-        Page<PostResponseDto> pages = adminService.getPostList(pageable, searchDto);
+        Page<PostResponseDto> postList = adminService.getPostList(pageable, searchDto);
 
-        model.addAttribute("posts", pages.getContent());
-        model.addAttribute("pages", pages.getPageImpl());
+        model.addAttribute("posts", postList.getContent());
+        model.addAttribute("pages", postList.getPageImpl());
         model.addAttribute("search", searchDto);
 
         return "/admin/postlist";
+    }
+
+    @GetMapping("/user-statistics")
+    public String userStatistics(Pageable pageable, SearchDto searchDto, Model model) {
+        Page<UserStatisticsDto> statistics = adminService.getUserStatistics(pageable, searchDto);
+
+        model.addAttribute("statistics", statistics.getContent());
+        model.addAttribute("pages", statistics.getPageImpl());
+        model.addAttribute("search", searchDto);
+
+        return "/admin/statistics";
     }
 
 }

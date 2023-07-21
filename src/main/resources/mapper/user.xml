@@ -5,6 +5,24 @@
 
 <mapper namespace="com.snowball.boardadmin.domain.user.repository.UserRepository">
 
+    <select id="findStatistics">
+        select u.id, u.user_name, u.user_role,
+        (select count(*) from post where user_id = u.id) as post_count,
+        (select count(*) from comment where user_id = u.id) as comment_count,
+        (select count(*) from reply where user_id = u.id) as reply_count,
+        from user_tb u
+        <if test='option == "post"'>
+            ORDER BY post_count DESC
+        </if>
+        <if test='option == "comment"'>
+            ORDER BY comment_count DESC
+        </if>
+        <if test='option == "reply"'>
+            ORDER BY reply_count DESC
+        </if>
+        limit #{offset}, #{size}
+    </select>
+
     <update id="updateUserRole">
         update user_tb
         set user_role = #{userRole}
