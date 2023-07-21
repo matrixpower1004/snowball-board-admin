@@ -14,23 +14,33 @@ public record UserResponseDto(
         String userName,
         String email,
         String nickName,
-        UserRole userRole,
+        String userRole,
         Timestamp updatedAt
 ) {
-        public static UserResponseDto of(
-                Long id,
-                String userName,
-                String email,
-                String nickName,
-                UserRole userRole,
-                Timestamp updatedAt
-        ) {
-            return new UserResponseDto(
-                    id,
-                    userName,
-                    email,
-                    nickName,
-                    UserRole.valueOf(userRole.name()),
-                    updatedAt);
-        }
+    public UserResponseDto(Long id, String userName, String email, String nickName, String userRole, Timestamp updatedAt) {
+        this.userRole = UserRole.getValueByName.apply(userRole);
+        this.id = id;
+        this.userName = userName;
+        this.email = email;
+        this.nickName = nickName;
+        this.updatedAt = updatedAt;
+    }
+
+    public static UserResponseDto from(
+            Long id,
+            String userName,
+            String email,
+            String nickName,
+            UserRole userRole,
+            Timestamp updatedAt
+    ) {
+        return new UserResponseDto(
+                id,
+                userName,
+                email,
+                nickName,
+                userRole.getValue(),
+                updatedAt
+        );
+    }
 }
