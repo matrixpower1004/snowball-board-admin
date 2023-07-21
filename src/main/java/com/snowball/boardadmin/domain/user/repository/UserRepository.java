@@ -1,8 +1,9 @@
 package com.snowball.boardadmin.domain.user.repository;
 
 import com.snowball.boardadmin.common.dto.PageRequestDto;
-import com.snowball.boardadmin.domain.user.dto.UserRequestDto;
 import com.snowball.boardadmin.domain.user.dto.UserResponseDto;
+import com.snowball.boardadmin.domain.user.dto.UserStatisticsDto;
+import com.snowball.boardadmin.domain.user.dto.UserUpdateDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -14,14 +15,16 @@ import java.util.List;
  */
 @Mapper
 public interface UserRepository {
-    int updateUserRole(UserRequestDto userRequestDto);
+    int updateUserRole(UserUpdateDto userUpdateDto);
 
     List<UserResponseDto> findAll();
 
     int count();
 
-    int searchResultCount(PageRequestDto pageRequestDto);
+    int countByOption(PageRequestDto pageRequestDto);
 
-    List<UserResponseDto> searchResultList(PageRequestDto pageRequestDto);
+    List<UserResponseDto> findByOption(PageRequestDto pageRequestDto);
+
+    List<UserStatisticsDto> findStatistics(PageRequestDto pageRequestDto);
 
 }

@@ -1,6 +1,6 @@
-package com.snowball.boardadmin.domain.board.repository;
+package com.snowball.boardadmin.domain.post.repository;
 
-import com.snowball.boardadmin.domain.board.dto.ReportRequestDto;
+import com.snowball.boardadmin.domain.post.dto.ReportResponseDto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,10 +20,10 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
  */
 @MybatisTest
 @AutoConfigureTestDatabase(replace= NONE)
-class ReportBoardRepositoryTest {
+class ReportRepositoryTest {
 
     @Autowired
-    private ReportBoardRepository reportBoardRepository;
+    private ReportRepository reportRepository;
 
     @DisplayName("신고게시판 목록 조회 테스트")
     @Test
@@ -31,7 +31,7 @@ class ReportBoardRepositoryTest {
         // Given
 
         // When
-        List<ReportRequestDto> reportRequestDtos = reportBoardRepository.findAll();
+        List<ReportResponseDto> reportRequestDtos = reportRepository.findAll();
         System.out.println("size : " + reportRequestDtos.size());
 
         // Then
@@ -43,10 +43,10 @@ class ReportBoardRepositoryTest {
     void reportBoard_delete_test() {
         // Given
         // 가장 많이 신고가 된 게시글의 id를 가져와서 삭제를 한다.
-        Long postId = reportBoardRepository.findByMaxReportId();
+        Long postId = reportRepository.findByMaxReportId();
 
         // When
-        int result = reportBoardRepository.deleteByPostId(postId);
+        int result = reportRepository.deleteByPostId(postId);
 
         // Then
         assertThat(result).isGreaterThan(1);
@@ -56,8 +56,8 @@ class ReportBoardRepositoryTest {
     @Test
     void reportBoard_countByDistinct_test() {
         // Given
-        int countAll = reportBoardRepository.count();
-        int countDistinct = reportBoardRepository.countByDistinct();
+        int countAll = reportRepository.count();
+        int countDistinct = reportRepository.countByDistinct();
 
         System.out.println("countAll = " + countAll);
         System.out.println("countDistinct = " + countDistinct);

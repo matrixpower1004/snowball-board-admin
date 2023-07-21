@@ -1,5 +1,6 @@
 package com.snowball.boardadmin.common.pagination;
 
+import com.snowball.boardadmin.common.dto.SearchDto;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
