@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="headerFragment">
+    <header>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <div class="container-fluid">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" th:text="Home"
+                           th:href="@{'/admin/'}"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:text="게시글"
+                           th:href="@{'/admin/post-list'}">Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:text="유저"
+                           th:href="@{'/admin/user-list'}"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:text="유저통계"
+                           th:href="@{'/admin/user-statistics'}"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:text="신고게시글"
+                           th:href="@{'/admin/report-list'}"></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+</div>
+</html>
