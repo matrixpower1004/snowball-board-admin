@@ -1,8 +1,8 @@
-package com.snowball.boardadmin.domain.board.model;
+package com.snowball.boardadmin.domain.post.model;
 
-import com.snowball.boardadmin.common.util.UserRole;
 import lombok.*;
 import java.sql.Timestamp;
+
 /**
  * author         : Jason Lee
  * date           : 2023-07-13
@@ -14,14 +14,13 @@ import java.sql.Timestamp;
 @ToString
 @EqualsAndHashCode
 @Builder
-public class Post {
+public class Reply {
 
     private Long id;
+    private Long commentId;
     private Long userId;
-    private String title;
+    private Long postId;
     private String content;
-    private boolean blindState;
-    private UserRole userRole;
     private Timestamp createdAt;
     private Timestamp updatedAt;
 }
