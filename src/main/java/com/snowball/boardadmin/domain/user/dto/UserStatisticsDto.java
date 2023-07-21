@@ -1,4 +1,4 @@
-package com.snowball.boardadmin.domain.board.dto;
+package com.snowball.boardadmin.domain.user.dto;
 
 import com.snowball.boardadmin.common.util.UserRole;
 
@@ -7,7 +7,7 @@ import com.snowball.boardadmin.common.util.UserRole;
  * date           : 2023-07-14
  * description    :
  */
-public record BoardStatisticsDto(
+public record UserStatisticsDto(
         Long id,
         String userName,
         UserRole userRole,
@@ -16,7 +16,7 @@ public record BoardStatisticsDto(
         Integer replyCount    // 대댓글 수
 ) {
 
-    public static BoardStatisticsDto of(
+    public static UserStatisticsDto of(
             Long id,
             String userName,
             UserRole userRole,
@@ -24,7 +24,7 @@ public record BoardStatisticsDto(
             Integer commentCount,
             Integer replyCount
     ) {
-        return new BoardStatisticsDto(
+        return new UserStatisticsDto(
                 id,
                 userName,
                 userRole,

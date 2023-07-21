@@ -27,53 +27,7 @@ class PostRepositoryTest {
     @Autowired
     private PostRepository postRepository;
 
-    @DisplayName("게시글 통계 조회 : 댓글 많은 유저순 정렬 테스트")
-    @Test
-    void findPostStatistics_OrderByComment_Success_Test() {
-        // Given
-        SearchDto searchDto = SearchDto.of("comment", "");
-        List<UserStatisticsDto> statistics = postRepository.findStatistics(searchDto);
 
-        // When
-        int commentCount0 = statistics.get(0).commentCount();
-        int commentCount1 = statistics.get(1).commentCount();
-
-        // Then
-        // 첫 게시글의 댓글 갯수가 두번째 게시글의 댓글 갯수보다 많거나 같다.
-        assertTrue(commentCount0 >= commentCount1);
-    }
-
-    @DisplayName("게시글 통계 조회 : 대댓글 많은 유저순 정렬 테스트")
-    @Test
-    void findPostStatistics_OrderByReply_Success_Test() {
-        // Given
-        SearchDto searchDto = SearchDto.of("reply", "");
-        List<UserStatisticsDto> statistics = postRepository.findStatistics(searchDto);
-
-        // When
-        int replyCount0 = statistics.get(0).replyCount();
-        int replyCount1 = statistics.get(1).replyCount();
-
-        // Then
-        // 첫 게시물의 대댓글 갯수가 두번째 게시물의 대댓글 갯수보다 많거나 같다.
-        assertTrue(replyCount0 >= replyCount1);
-    }
-
-    @DisplayName("게시글 통계 조회 : 게시글 많은 유저순 정렬 테스트")
-    @Test
-    void findPostStatistics_OrderByPost_Success_Test() {
-        // Given
-        SearchDto searchDto = SearchDto.of("post", "");
-        List<UserStatisticsDto> statistics = postRepository.findStatistics(searchDto);
-
-        // When
-        int postCount0 = statistics.get(0).postCount();
-        int postCount1 = statistics.get(0).postCount();
-
-        // Then
-        // 첫 게시글의 갯수가 두번째 게시글의 갯수보다 많거나 같다.
-        assertTrue(postCount0 >= postCount1);
-    }
 
     @DisplayName("게시글 블라인드 상태 변경 테스트")
     @Test

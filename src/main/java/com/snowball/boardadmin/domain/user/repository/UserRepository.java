@@ -2,6 +2,7 @@ package com.snowball.boardadmin.domain.user.repository;
 
 import com.snowball.boardadmin.common.dto.PageRequestDto;
 import com.snowball.boardadmin.domain.user.dto.UserResponseDto;
+import com.snowball.boardadmin.domain.user.dto.UserStatisticsDto;
 import com.snowball.boardadmin.domain.user.dto.UserUpdateDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -23,5 +24,7 @@ public interface UserRepository {
     int countByOption(PageRequestDto pageRequestDto);
 
     List<UserResponseDto> findByOption(PageRequestDto pageRequestDto);
+
+    List<UserStatisticsDto> findStatistics(PageRequestDto pageRequestDto);
 
 }

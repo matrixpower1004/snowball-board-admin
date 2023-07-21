@@ -17,7 +17,6 @@ import java.util.List;
 @Mapper
 public interface PostRepository {
 
-    List<UserStatisticsDto> findStatistics(SearchDto searchDto);
     int saveState(PostStateUpdateDto postStateUpdateDto);
     int delete(Long id);
 
