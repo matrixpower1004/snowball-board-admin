@@ -1,7 +1,7 @@
-package com.snowball.boardadmin.domain.board.repository;
+package com.snowball.boardadmin.domain.post.repository;
 
 import com.snowball.boardadmin.common.dto.PageRequestDto;
-import com.snowball.boardadmin.domain.board.dto.ReportRequestDto;
+import com.snowball.boardadmin.domain.post.dto.ReportResponseDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -12,13 +12,13 @@ import java.util.List;
  * description    :
  */
 @Mapper
-public interface ReportBoardRepository {
+public interface ReportRepository {
 
-    List<ReportRequestDto> findAll();
+    List<ReportResponseDto> findAll();
     int deleteByPostId(Long postId);
     int countByDistinct();
     Long findByMaxReportId();
-    List<ReportRequestDto> searchResultList(PageRequestDto pageRequestDto);
+    List<ReportResponseDto> findByOption(PageRequestDto pageRequestDto);
 
     int count();
 

@@ -1,7 +1,8 @@
-package com.snowball.boardadmin.domain.board.repository;
+package com.snowball.boardadmin.domain.post.repository;
 
-import com.snowball.boardadmin.domain.board.dto.BoardStateUpdateDto;
-import com.snowball.boardadmin.domain.board.dto.BoardStatisticsDto;
+import com.snowball.boardadmin.common.dto.SearchDto;
+import com.snowball.boardadmin.domain.post.dto.PostStateUpdateDto;
+import com.snowball.boardadmin.domain.user.dto.UserStatisticsDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
@@ -21,17 +22,17 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
  */
 @MybatisTest
 @AutoConfigureTestDatabase(replace= NONE)
-class BoardRepositoryTest {
+class PostRepositoryTest {
 
     @Autowired
-    private BoardRepository boardRepository;
+    private PostRepository postRepository;
 
-    @DisplayName("게시판 통계 조회 : 댓글 많은 유저순 정렬 테스트")
+    @DisplayName("게시글 통계 조회 : 댓글 많은 유저순 정렬 테스트")
     @Test
-    void findBoardStatistics_OrderByComment_Success_Test() {
+    void findPostStatistics_OrderByComment_Success_Test() {
         // Given
-        String order = "comment";
-        List<BoardStatisticsDto> statistics = boardRepository.findStatistics(order);
+        SearchDto searchDto = SearchDto.of("comment", "");
+        List<UserStatisticsDto> statistics = postRepository.findStatistics(searchDto);
 
         // When
         int commentCount0 = statistics.get(0).commentCount();
@@ -42,12 +43,12 @@ class BoardRepositoryTest {
         assertTrue(commentCount0 >= commentCount1);
     }
 
-    @DisplayName("게시판 통계 조회 : 대댓글 많은 유저순 정렬 테스트")
+    @DisplayName("게시글 통계 조회 : 대댓글 많은 유저순 정렬 테스트")
     @Test
-    void findBoardStatistics_OrderByReply_Success_Test() {
+    void findPostStatistics_OrderByReply_Success_Test() {
         // Given
-        String order = "reply";
-        List<BoardStatisticsDto> statistics = boardRepository.findStatistics(order);
+        SearchDto searchDto = SearchDto.of("reply", "");
+        List<UserStatisticsDto> statistics = postRepository.findStatistics(searchDto);
 
         // When
         int replyCount0 = statistics.get(0).replyCount();
@@ -58,12 +59,12 @@ class BoardRepositoryTest {
         assertTrue(replyCount0 >= replyCount1);
     }
 
-    @DisplayName("게시판 통계 조회 : 게시글 많은 유저순 정렬 테스트")
+    @DisplayName("게시글 통계 조회 : 게시글 많은 유저순 정렬 테스트")
     @Test
-    void findBoardStatistics_OrderByPost_Success_Test() {
+    void findPostStatistics_OrderByPost_Success_Test() {
         // Given
-        String order = "post";
-        List<BoardStatisticsDto> statistics = boardRepository.findStatistics(order);
+        SearchDto searchDto = SearchDto.of("post", "");
+        List<UserStatisticsDto> statistics = postRepository.findStatistics(searchDto);
 
         // When
         int postCount0 = statistics.get(0).postCount();
@@ -74,27 +75,27 @@ class BoardRepositoryTest {
         assertTrue(postCount0 >= postCount1);
     }
 
-    @DisplayName("게시판 블라인드 상태 변경 테스트")
+    @DisplayName("게시글 블라인드 상태 변경 테스트")
     @Test
-    void boardState_Update_Success_Test() {
+    void postState_Update_Success_Test() {
         // Given
-        BoardStateUpdateDto boardStateUpdateDto = BoardStateUpdateDto.of(1L, true);
+        PostStateUpdateDto postStateUpdateDto = PostStateUpdateDto.of(1L, true);
 
         // When
-        int result = boardRepository.saveState(boardStateUpdateDto);
+        int result = postRepository.saveState(postStateUpdateDto);
 
         // Then
         assertThat(result).isEqualTo(1);
     }
 
-    @DisplayName("게시판 삭제 테스트")
+    @DisplayName("게시글 삭제 테스트")
     @Test
-    void boardDelete_Success_Test() {
+    void postDelete_Success_Test() {
         // Given
         Long id = 1L;
 
         // When
-        int result = boardRepository.delete(id);
+        int result = postRepository.delete(id);
 
         // Then
         assertThat(result).isEqualTo(1);

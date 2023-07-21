@@ -1,6 +1,7 @@
-package com.snowball.boardadmin.domain.board.model;
+package com.snowball.boardadmin.domain.post.model;
 
 import lombok.*;
+
 import java.sql.Timestamp;
 
 /**
@@ -14,10 +15,9 @@ import java.sql.Timestamp;
 @ToString
 @EqualsAndHashCode
 @Builder
-public class Reply {
+public class Comment {
 
     private Long id;
-    private Long commentId;
     private Long userId;
     private Long postId;
     private String content;

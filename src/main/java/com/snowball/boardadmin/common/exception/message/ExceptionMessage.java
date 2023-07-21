@@ -11,7 +11,9 @@ public enum ExceptionMessage {
     INNER_SERVER_ERROR("서버 내부 오류가 발생했습니다."),
     ALREADY_EXISTS_USER("이미 존재하는 유저입니다."),
     DUPLICATE_NICKNAME("해당 닉네임은 이미 사용 중입니다."),
-    INVALID_PAGE_REQUEST("잘못된 페이지 요청입니다.");
+    INVALID_PAGE_REQUEST("잘못된 페이지 요청입니다."),
+    INVALID_REPORT_TYPE("존재하지 않는 신고 유형입니다."),
+    INVALID_USER_ROLE("존재하지 않는 사용자 권한입니다.");
 
     private final String message;
 

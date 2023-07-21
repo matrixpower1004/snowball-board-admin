@@ -1,4 +1,4 @@
-package com.snowball.boardadmin.domain.board.model;
+package com.snowball.boardadmin.domain.post.model;
 
 import com.snowball.boardadmin.common.util.ReportType;
 import lombok.*;
@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 @ToString
 @EqualsAndHashCode
 @Builder
-public class ReportBoard {
+public class Report {
 
     private Long id;
     private Long postId;
