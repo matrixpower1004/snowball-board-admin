@@ -7,16 +7,16 @@ import com.snowball.boardadmin.common.util.UserRole;
  * date           : 2023-07-13
  * description    :
  */
-public record UserRequestDto(
+public record UserUpdateDto(
         Long id,
         UserRole userRole
 ) {
 
-    public static UserRequestDto of(
+    public static UserUpdateDto of(
             Long id,
             UserRole userRole
     ) {
-        return new UserRequestDto(
+        return new UserUpdateDto(
                 id,
                 userRole);
     }
