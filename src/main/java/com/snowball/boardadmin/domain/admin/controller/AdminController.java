@@ -29,8 +29,7 @@ public class AdminController {
     @GetMapping("/")
     public String adminIndex() {
         //todo: security 설정 완료되면 접근한 사용자의 권한이 admin이 아니면 예외 발생 시키기
-
-        return "/admin/index";
+        return "redirect:/admin/report-list";
     }
 
     @GetMapping("/user-list")
