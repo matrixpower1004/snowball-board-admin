@@ -110,7 +110,7 @@ CREATE TABLE `reply`
     FOREIGN KEY (user_id) REFERENCES user_tb (id)
 ) DEFAULT CHARSET = utf8mb4;
 ```
-### 테스트용 더미 데이터는 애플리케이션 시작 시 자동으로 insert 됩니다.
+### DB 테이블 및 테스트용 더미 데이터는 애플리케이션 시작 시 자동으로 insert 됩니다.
 ## ERD
 ![Image](https://github.com/matrixpower1004/snowball-board-admin/assets/104916288/1c872b8a-aeea-4372-b95b-e495141b2143)
 ## API 명세서
