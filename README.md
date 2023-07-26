@@ -117,6 +117,7 @@ CREATE TABLE `reply`
 - 팀장 : [이지상] (https://github.com/matrixpower1004)
   * 프로젝트 셋업
   * 신고 게시판, 게시판, 댓글(대댓글) DB 테이블 설계
+  * 테스트용 더미 데이터 생성
   * Admin 기능
 - 팀원 : [배종윤] (https://github.com/jy-b)
   * Spring Security 설정
