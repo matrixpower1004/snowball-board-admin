@@ -127,8 +127,9 @@ https://docs.google.com/spreadsheets/d/1qEEMAMGnR2dmHo5dzFqQ1OJ8OIxQWEr2DDqrvdOP
   * 유저 기능(가입, 로그인)
   * 유저 등업 배치 처리
 - 팀원 : [박민기] (https://github.com/Coding9nt)
+  * 게시판 기능
 - 팀원 : [박성욱] (https://github.com/gosuuk)
-  * 유저 게시판, 댓글, 대댓글 기능
+  * 댓글, 대댓글 기능
 ## 프로젝트 후기
 - 팀장 : 이지상
   * 멀티 모듈 프로젝트라는 개념을 알지 못해서 중간에 프로젝트 자체를 완전히 분리하는 시행 착오를 겪은 점이 아쉬웠습니다.
