@@ -113,6 +113,8 @@ CREATE TABLE `reply`
 ### 테스트용 더미 데이터는 애플리케이션 시작 시 자동으로 insert 됩니다.
 ## ERD
 ![Image](https://github.com/matrixpower1004/snowball-board-admin/assets/104916288/1c872b8a-aeea-4372-b95b-e495141b2143)
+## API 명세서
+https://docs.google.com/spreadsheets/d/1qEEMAMGnR2dmHo5dzFqQ1OJ8OIxQWEr2DDqrvdOPgFo/edit#gid=0
 ## 팀원 역할 분담
 - 팀장 : [이지상] (https://github.com/matrixpower1004)
   * 프로젝트 셋업
